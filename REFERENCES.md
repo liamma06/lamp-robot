@@ -1,0 +1,4 @@
+# References
+
+- [Challenge brief (SW/CV Challenge)](https://docs.google.com/document/d/1mxyuLpQVXKC1r2VhViCCjWhAg8QBZtvDLlpHbQXxcR0/edit)
+- [Bill of materials (BOM-LAMP sheet)](https://docs.google.com/spreadsheets/d/1V-kWyB_abHdd5QoXr_BD3az193OaC49rbLtoEylhK_0/edit)

@@ -4,5 +4,5 @@ A 6-axis expressive lamp robot. It notices people, tries to get their attention,
 
 Work in progress, built for the Human Computer Lab lamp robot challenge.
 
-- Links to the challenge brief and the bill of materials: [REFERENCES.txt](REFERENCES.txt)
+- Links to the challenge brief and the bill of materials: [REFERENCES.md](REFERENCES.md)
 - License: [MIT](LICENSE)
