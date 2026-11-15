@@ -4,9 +4,9 @@ A 6-axis expressive lamp robot. It notices people, tries to get their attention,
 
 Work in progress.
 
-<video src="https://github.com/liamma06/lamp-robot/raw/main/lamp-robot-3d.mp4" controls muted width="640"></video>
+![Lamp robot 3D demo](images/build/lamp-robot-3d.gif)
 
-[Watch the video](lamp-robot-3d.mp4) if it doesn't play above.
+[Full-quality video (mp4)](https://github.com/liamma06/lamp-robot/raw/main/lamp-robot-3d.mp4)
 
 - [Build journal](https://docs.google.com/document/d/1FafV6sYWJsIyEPJD50v6SspsQr1C0WBp2hjmtgFsbPM/edit?usp=sharing)
 - [Bill of materials (BOM)](https://docs.google.com/spreadsheets/d/1V-kWyB_abHdd5QoXr_BD3az193OaC49rbLtoEylhK_0/edit?usp=sharing)
