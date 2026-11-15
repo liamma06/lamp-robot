@@ -1,0 +1,5 @@
+﻿*.SLDPRT binary
+*.SLDASM binary
+*.SLDDRW binary
+*.step -text
+*.3mf binary

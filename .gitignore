@@ -1,0 +1,10 @@
+﻿# SolidWorks lock/temp files
+~$*
+*.SLDLFP.bak
+*.swp
+# KiCad lock/backup/history
+*.lck
+*-backups/
+.history/
+fp-info-cache
+*.kicad_prl
