@@ -24,3 +24,6 @@ desktop.ini
 # Regenerable exports
 *.stl
 *.pdf
+
+# Crash dumps
+*.stackdump
