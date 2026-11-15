@@ -8,3 +8,19 @@
 .history/
 fp-info-cache
 *.kicad_prl
+
+# Reference files (local only)
+3D_assets/reference/
+
+# Backups / temp / OS junk
+*.bak
+*.tmp
+*.autosave
+*-backups/
+*.log
+Thumbs.db
+desktop.ini
+
+# Regenerable exports
+*.stl
+*.pdf
