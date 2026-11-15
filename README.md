@@ -13,7 +13,6 @@ Work in progress.
 
 ## Next steps
 
-- Finish the head and wrist mates in the SolidWorks assembly
 - Write the URDF and a PyBullet sim to test joint limits and motion
 - Re-run the torque check on the final dimensions
 - Order parts and print the arms and base
