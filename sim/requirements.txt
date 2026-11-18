@@ -1,3 +1,5 @@
 pybullet
 numpy
-pywin32
+trimesh
+scipy
+pywin32; sys_platform == "win32"   # only for build/extract_zero_pose.py (SolidWorks)

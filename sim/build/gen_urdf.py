@@ -1,8 +1,11 @@
 """Build lamp.urdf from build/zero_pose.json (SolidWorks zero pose = CAD pose with J1 at 90 deg).
-SolidWorks is Y-up; the URDF is rotated to Z-up. Link frames are world-aligned at each joint pivot."""
-import json, math
+SolidWorks is Y-up; the URDF is rotated to Z-up. Link frames are world-aligned at each joint pivot.
+Meshes: sim/meshes/*.STL and sim/meshes/servos/*.STL (one STL per CAD part, exported from SolidWorks in assembly coordinates, metres).
+They are merged per link into sim/meshes/links/ (visual + convex-hull collision)."""
+import json, math, re
 from pathlib import Path
 import numpy as np
+import trimesh
 
 HERE = Path(__file__).parent
 
@@ -29,10 +32,10 @@ JOINTS = [
     ("J3", "lower_arm", "upper_arm", "Concentric4", "J3 angle", (-30, 140)),
     ("J4", "upper_arm", "roll", "Concentric6", "J4 angle", (-170, 170)),
     ("J5", "roll", "yoke", "Concentric8", "J5 angle", (-70, 70)),
-    ("J6", "yoke", "head", "Concentric9", None, (-170, 170)),
+    ("J6", "yoke", "head", "Concentric9", "J6 angle", (-170, 170)),
 ]
 REP = {"J1 angle": "Servo bottom-1", "J2 angle": "J2 lower arm^main-1", "J3 angle": "J3 upper arm^main-1",
-       "J4 angle": "Servo arm 2 con-1", "J5 angle": "J5 yoke^main-1"}
+       "J4 angle": "Servo arm 2 con-1", "J5 angle": "J5 yoke^main-1", "J6 angle": "head front^main-1"}
 
 def is_servo(n): return n.startswith("STS3215")
 
@@ -41,10 +44,8 @@ pivot, axis = {}, {}
 for j, par, ch, mate, key, lim in JOINTS:
     pts = [np.array(e["pt"]) for e in r["axes_at_zero"][mate]]
     pivot[j] = sum(pts) / len(pts)
-    if key:   # positive direction = rotation sense of +5 deg mate change (measured)
-        ax = np.array(r["perturb"][key][REP[key]]["axis"])
-    else:     # J6 has no mate: +X toward the LED face (assumption)
-        ax = np.array(r["axes_at_zero"][mate][0]["dir"])
+    # positive direction = rotation sense of a +5 deg change of that joint's angle mate (measured in CAD)
+    ax = np.array(r["perturb"][key][REP[key]]["axis"])
     axis[j] = ax / np.linalg.norm(ax)
     if abs(axis[j][2]) > 0.9:   # slide the pivot along the axis to the lamp mid-plane (SW z = 0)
         pivot[j] = pivot[j] - axis[j] * pivot[j][2] / axis[j][2]
@@ -73,26 +74,73 @@ def rpy_z_to(v):  # rotation taking +z to unit v (URDF frame) as rpy
     R = np.eye(3) + math.sin(ang) * K + (1 - math.cos(ang)) * K @ K
     return np.array([math.atan2(R[2, 1], R[2, 2]), math.asin(-R[2, 0]), math.atan2(R[1, 0], R[0, 0])])
 
+
+# ---------------------------------------------------------------- meshes
+MESH_DIR = HERE.parent / "meshes"
+OUT_DIR = MESH_DIR / "links"
+COLORS = {"base": "0.55 0.55 0.58", "turntable": "0.35 0.35 0.4", "lower_arm": "0.95 0.75 0.25", "upper_arm": "0.95 0.6 0.2",
+          "roll": "0.3 0.3 0.35", "yoke": "0.9 0.45 0.25", "head": "0.95 0.95 0.9"}
+comp_link = {c: ln for ln, cs in LINKS.items() for c in cs}
+
+def stl_owner(stem):   # "main - STS3215_c.step-3 Top.step-1" -> "STS3215_c.step-3"
+    m = re.match(r"(STS3215_c\.step-\d+) ", stem)
+    return m.group(1) if m else stem
+
+def com_world(c):
+    return np.array(tf[c]["R"]) @ np.array(mass[c]["com_local"]) + np.array(tf[c]["t"])
+
+def build_meshes():
+    files = sorted(MESH_DIR.glob("main - *.STL")) + sorted((MESH_DIR / "servos").glob("main - *.STL"))
+    by_link, unknown = {}, []
+    for f in files:
+        comp = stl_owner(f.stem[len("main - "):])
+        (by_link.setdefault(comp_link[comp], []).append(f) if comp in comp_link else unknown.append(f.name))
+    # The STLs may have been exported at a different J1 angle than the zero pose: fit the yaw about the vertical axis.
+    single = [c for c in ("head front^main-1", "J2 lower arm^main-1", "J3 upper arm^main-1", "J5 yoke^main-1", "Servo arm 2 con-1")
+              if (MESH_DIR / f"main - {c}.STL").exists()]
+    d = []
+    for c in single:
+        m = trimesh.load(MESH_DIR / f"main - {c}.STL").center_mass; w = com_world(c)
+        d.append((math.atan2(m[2], m[0]) - math.atan2(w[2], w[0]) + math.pi) % (2 * math.pi) - math.pi)
+    phi = float(np.median(d)) if d else 0.0
+    Ry = np.array([[math.cos(phi), 0, math.sin(phi)], [0, 1, 0], [-math.sin(phi), 0, math.cos(phi)]])
+    resid = [np.linalg.norm(Ry @ trimesh.load(MESH_DIR / f"main - {c}.STL").center_mass - com_world(c)) * 1000 for c in single]
+    print(f"meshes: {len(files)} STL files, yaw fix {math.degrees(phi):+.3f} deg, centroid-vs-CAD residual (mm): {np.round(resid, 2).tolist()}")
+    if unknown: print("  meshes with no link (skipped):", unknown)
+    missing = [c for c in comp_link if not any(stl_owner(f.stem[len("main - "):]) == c for f in files)]
+    if missing: print("  CAD components with no mesh:", missing)
+    OUT_DIR.mkdir(parents=True, exist_ok=True)
+    result = {}
+    for name, fs in by_link.items():
+        parts = []
+        for f in fs:
+            m = trimesh.load(f)
+            v = np.asarray(m.vertices) @ (Ry.T if name != "base" else np.eye(3))        # undo the J1 difference (base is fixed)
+            v = (v - origin[name]) @ Q.T                                                 # into the URDF link frame
+            parts.append(trimesh.Trimesh(v, m.faces, process=False))
+        merged = trimesh.util.concatenate(parts)
+        merged.export(OUT_DIR / f"{name}.stl"); merged.convex_hull.export(OUT_DIR / f"{name}_hull.stl")
+        result[name] = (f"meshes/links/{name}.stl", f"meshes/links/{name}_hull.stl")
+        print(f"  {name:10s} {len(fs):3d} parts, {len(merged.faces):6d} tris, hull {len(merged.convex_hull.faces)} tris")
+    return result
+
+mesh_files = build_meshes()
+
 child_of = {par: ch for _, par, ch, *_ in JOINTS}
 out = ['<?xml version="1.0"?>',
        '<!-- Generated by gen_urdf.py from build/zero_pose.json. Zero pose = SolidWorks CAD pose (J1=90, J2=60, J3=40, J4=90, J5=100 mate angles). -->',
-       '<!-- Collision shapes are simple approximations (cylinders between pivots, box head, placeholder base), not the real meshes. -->',
+       '<!-- Visual = merged CAD meshes per link; collision = convex hull of each link mesh. -->',
        '<robot name="lamp">']
 for name in LINKS:
     M, com, I = link[name]
     o = Q @ origin[name]; c = Q @ com - o; I2 = Q @ I @ Q.T
-    if name == "base": geo = ('cylinder radius="0.07" length="0.05"', np.array([0, 0, 0.025]), np.zeros(3))
-    elif name == "head": geo = ('box size="0.07 0.07 0.07"', c, np.zeros(3))
-    else:
-        nxt = pivot[[j for j, p, ch, *_ in JOINTS if p == name][0]]
-        vec = Q @ nxt - o; L = max(np.linalg.norm(vec), 0.02)
-        geo = (f'cylinder radius="0.015" length="{L:.4f}"', vec / 2, rpy_z_to(vec))
     out.append(f'  <link name="{name}">')
     out.append(f'    <inertial><origin xyz="{fmt(c)}" rpy="0 0 0"/><mass value="{M:.6f}"/>')
     out.append(f'      <inertia ixx="{I2[0,0]:.8f}" ixy="{I2[0,1]:.8f}" ixz="{I2[0,2]:.8f}" iyy="{I2[1,1]:.8f}" iyz="{I2[1,2]:.8f}" izz="{I2[2,2]:.8f}"/></inertial>')
-    for tag in ("visual", "collision"):
-        extra = '<material name="m"><color rgba="0.9 0.8 0.3 1"/></material>' if tag == "visual" else ""
-        out.append(f'    <{tag}><origin xyz="{fmt(geo[1])}" rpy="{fmt(geo[2])}"/><geometry><{geo[0]}/></geometry>{extra}</{tag}>')
+    vis, col = mesh_files[name]
+    out.append(f'    <visual><origin xyz="0 0 0" rpy="0 0 0"/><geometry><mesh filename="{vis}"/></geometry>'
+               f'<material name="{name}"><color rgba="{COLORS[name]} 1"/></material></visual>')
+    out.append(f'    <collision><origin xyz="0 0 0" rpy="0 0 0"/><geometry><mesh filename="{col}"/></geometry></collision>')
     out.append('  </link>')
 for j, par, ch, mate, key, lim in JOINTS:
     rel = Q @ (pivot[j] - origin[par]); ax = Q @ axis[j]

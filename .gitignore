@@ -30,3 +30,8 @@ desktop.ini
 
 sim/.venv/
 __pycache__/
+
+# Keep the sim meshes (needed by sim/lamp.urdf)
+!sim/meshes/
+!sim/meshes/**/*.stl
+!sim/meshes/**/*.STL

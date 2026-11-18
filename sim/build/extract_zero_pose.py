@@ -7,11 +7,23 @@ import numpy as np
 import win32com.client as wc
 
 OUT = Path(__file__).with_name("zero_pose.json")
-ZERO_DEG = {"J1 angle": 90.0, "J2 angle": 60.0, "J3 angle": 40.0, "J4 angle": 90.0, "J5 angle": 100.0}
+ZERO_DEG = {"J1 angle": 90.0, "J2 angle": 60.0, "J3 angle": 40.0, "J4 angle": 90.0, "J5 angle": 100.0, "J6 angle": 0.0}
 PERTURB = 5.0
 def call(o,n,*a):
     v=getattr(o,n); return v(*a) if isinstance(v,types.MethodType) else v
-sw = wc.Dispatch("SldWorks.Application"); d = sw.ActiveDoc
+def attach():
+    """Attach to the SolidWorks window that has an assembly open (not a stray hidden instance)."""
+    import pythoncom
+    rot = pythoncom.GetRunningObjectTable(); ctx = pythoncom.CreateBindCtx(0)
+    for m in rot.EnumRunning():
+        if "SolidWorks_PID" in m.GetDisplayName(ctx, None):
+            app = wc.Dispatch(rot.GetObject(m).QueryInterface(pythoncom.IID_IDispatch))
+            if app.ActiveDoc is not None:
+                return app
+    raise SystemExit("No SolidWorks window with a document open. Open main.SLDASM first.")
+
+
+sw = attach(); d = sw.ActiveDoc
 def angle_dims():
     out={}
     f=call(d,'FirstFeature')
@@ -66,7 +78,9 @@ def rotvec(R):
 res = {"abort": None}
 try:
     base0 = snap()
-    assert abs(math.degrees(orig["J2 angle"]) - 60) < 1e-6
+    for k, deg in ZERO_DEG.items():   # J1 is snapped below; the rest must already be at zero
+        if k != "J1 angle" and abs(math.degrees(orig[k]) - deg) > 1e-4:
+            raise SystemExit(f"{k} is {math.degrees(orig[k]):.4f} deg in the open file, expected {deg}")
     # 1. rebuild with no change: does the pose hold?
     d.ForceRebuild3(False); b1 = snap()
     res["rebuild_no_change_maxdiff"] = maxdiff(base0, b1)
