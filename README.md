@@ -6,7 +6,7 @@ Work in progress.
 
 ![Lamp robot 3D demo](images/build/lamp-robot-3d.gif)
 
-[Full-quality video (mp4)](https://github.com/liamma06/lamp-robot/raw/main/lamp-robot-3d.mp4)
+[Full-quality video (mp4)](https://github.com/liamma06/lamp-robot/raw/main/images/build/lamp-robot-3d.mp4)
 
 - [Build journal](https://docs.google.com/document/d/1FafV6sYWJsIyEPJD50v6SspsQr1C0WBp2hjmtgFsbPM/edit?usp=sharing)
 - [Bill of materials (BOM)](https://docs.google.com/spreadsheets/d/1V-kWyB_abHdd5QoXr_BD3az193OaC49rbLtoEylhK_0/edit?usp=sharing)
@@ -14,6 +14,13 @@ Work in progress.
 - [Schematic images](images/schematic)
 - Link to the challenge brief: [REFERENCES.md](REFERENCES.md)
 - License: [MIT](LICENSE)
+
+## Repo layout
+
+- `3D_assets/`: SolidWorks parts and assemblies (`main.SLDASM`), plus `external/` vendor models
+- `schematic/`: KiCad electronics
+- `sim/`: PyBullet simulation (see [sim/README.md](sim/README.md))
+- `images/`: build photos, schematic images, demo GIF and video
 
 ## Next steps
 

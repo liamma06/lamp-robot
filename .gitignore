@@ -27,3 +27,6 @@ desktop.ini
 
 # Crash dumps
 *.stackdump
+
+sim/.venv/
+__pycache__/
