@@ -1,7 +1,7 @@
 """Interactive viewer: one slider per joint (degrees from the CAD zero pose).
 Shows live holding torque per joint and warns on self-collision.
-Camera: Ctrl + left-drag rotates, mouse wheel zooms, Ctrl + middle-drag pans,
-or use the CAMERA sliders. Close the window to quit."""
+Camera: Ctrl + left-drag rotates, mouse wheel zooms, Ctrl + middle-drag pans.
+Close the window to quit."""
 import time
 import pybullet as p
 from run_sim import load, self_collisions
@@ -18,19 +18,9 @@ for j in joints:
     info = p.getJointInfo(robot, j)
     lo, hi = round(info[8] * 57.2958), round(info[9] * 57.2958)
     sliders[j] = p.addUserDebugParameter(f"{info[1].decode()} ({names[j]}) deg", lo, hi, 0)
-cam = {  # camera sliders (use these if the mouse controls don't work)
-    "yaw": p.addUserDebugParameter("CAMERA yaw", -180, 180, 60),
-    "pitch": p.addUserDebugParameter("CAMERA pitch", -89, 89, -20),
-    "zoom": p.addUserDebugParameter("CAMERA distance (m)", 0.2, 2.0, 0.7),
-}
-last_cam = tuple(p.readUserDebugParameter(s) for s in cam.values())
 status = p.addUserDebugText("", [0, 0, 0.45], textSize=1.2, textColorRGB=[1, 1, 1])
 
 while p.isConnected():
-    now = tuple(p.readUserDebugParameter(s) for s in cam.values())
-    if now != last_cam:          # only move the camera when a camera slider changed
-        last_cam = now
-        p.resetDebugVisualizerCamera(now[2], now[0], now[1], [0, 0, 0.15])
     q = [p.readUserDebugParameter(sliders[j]) * 0.0174533 for j in joints]
     for j, v in zip(joints, q):
         p.resetJointState(robot, j, v)
