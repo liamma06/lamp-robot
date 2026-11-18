@@ -23,4 +23,4 @@ Run everything from this `sim/` folder.
 2. `python build/extract_zero_pose.py` reads the assembly through the SolidWorks API and writes `build/zero_pose.json`. It temporarily edits angle mates in memory and restores them; it never saves.
 3. `python build/gen_urdf.py` turns that JSON and the STLs into `lamp.urdf`. Servo mass, effort, joint limits and link grouping are set at the top of this file.
 
-Zero pose = the CAD pose with mate angles J1 90, J2 60, J3 40, J4 90, J5 100 (J6 has no mate). Positive directions were measured by perturbing each mate; J6's is an assumption.
+Zero pose = the CAD pose with mate angles J1 90, J2 60, J3 40, J4 90, J5 100, J6 0. Positive directions were measured by perturbing each mate. Limits are relative to zero; J2 is capped at +42 (the lower arm touches the base at +46.5, measured in CAD).
