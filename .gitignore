@@ -31,6 +31,9 @@ desktop.ini
 sim/.venv/
 __pycache__/
 
+# Personal planning notes (local only)
+ROADMAP.md
+
 # Keep the sim meshes (needed by sim/lamp.urdf)
 !sim/meshes/
 !sim/meshes/**/*.stl

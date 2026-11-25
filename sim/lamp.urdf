@@ -3,51 +3,51 @@
 <!-- Visual = merged CAD meshes per link; collision = convex hull of each link mesh. -->
 <robot name="lamp">
   <link name="base">
-    <inertial><origin xyz="-0.001958359 0.000000249 0.025287468" rpy="0 0 0"/><mass value="0.592285"/>
-      <inertia ixx="0.00181676" ixy="0.00000000" ixz="0.00002116" iyy="0.00179067" iyz="-0.00000000" izz="0.00316012"/></inertial>
+    <inertial><origin xyz="-0.001874030 0.000000242 0.025207253" rpy="0 0 0"/><mass value="0.592285"/>
+      <inertia ixx="0.00183023" ixy="0.00000000" ixz="0.00002150" iyy="0.00180234" iyz="-0.00000001" izz="0.00318586"/></inertial>
     <visual><origin xyz="0 0 0" rpy="0 0 0"/><geometry><mesh filename="meshes/links/base.stl"/></geometry><material name="base"><color rgba="0.55 0.55 0.58 1"/></material></visual>
     <collision><origin xyz="0 0 0" rpy="0 0 0"/><geometry><mesh filename="meshes/links/base_hull.stl"/></geometry></collision>
   </link>
   <link name="turntable">
-    <inertial><origin xyz="-0.000036681 0.001137036 0.024510997" rpy="0 0 0"/><mass value="0.069766"/>
-      <inertia ixx="0.00002108" ixy="0.00000002" ixz="0.00000001" iyy="0.00001781" iyz="-0.00000031" izz="0.00001236"/></inertial>
+    <inertial><origin xyz="-0.000036607 0.001126257 0.024430561" rpy="0 0 0"/><mass value="0.069766"/>
+      <inertia ixx="0.00002109" ixy="0.00000002" ixz="0.00000001" iyy="0.00001786" iyz="-0.00000034" izz="0.00001207"/></inertial>
     <visual><origin xyz="0 0 0" rpy="0 0 0"/><geometry><mesh filename="meshes/links/turntable.stl"/></geometry><material name="turntable"><color rgba="0.35 0.35 0.4 1"/></material></visual>
     <collision><origin xyz="0 0 0" rpy="0 0 0"/><geometry><mesh filename="meshes/links/turntable_hull.stl"/></geometry></collision>
   </link>
   <link name="lower_arm">
     <inertial><origin xyz="-0.065606975 0.000349794 0.037875000" rpy="0 0 0"/><mass value="0.074165"/>
-      <inertia ixx="0.00004315" ixy="-0.00000059" ixz="0.00004535" iyy="0.00011042" iyz="0.00000040" izz="0.00009551"/></inertial>
+      <inertia ixx="0.00004260" ixy="-0.00000058" ixz="0.00004459" iyy="0.00010868" iyz="0.00000039" izz="0.00009409"/></inertial>
     <visual><origin xyz="0 0 0" rpy="0 0 0"/><geometry><mesh filename="meshes/links/lower_arm.stl"/></geometry><material name="lower_arm"><color rgba="0.95 0.75 0.25 1"/></material></visual>
     <collision><origin xyz="0 0 0" rpy="0 0 0"/><geometry><mesh filename="meshes/links/lower_arm_hull.stl"/></geometry></collision>
   </link>
   <link name="upper_arm">
-    <inertial><origin xyz="0.041039661 -0.004162067 0.029900359" rpy="0 0 0"/><mass value="0.173758"/>
-      <inertia ixx="0.00007601" ixy="0.00001862" ixz="-0.00008145" iyy="0.00031626" iyz="0.00000598" izz="0.00030122"/></inertial>
+    <inertial><origin xyz="0.041343702 -0.004053389 0.030044653" rpy="0 0 0"/><mass value="0.173758"/>
+      <inertia ixx="0.00007661" ixy="0.00001820" ixz="-0.00008267" iyy="0.00031854" iyz="0.00000591" izz="0.00030282"/></inertial>
     <visual><origin xyz="0 0 0" rpy="0 0 0"/><geometry><mesh filename="meshes/links/upper_arm.stl"/></geometry><material name="upper_arm"><color rgba="0.95 0.6 0.2 1"/></material></visual>
     <collision><origin xyz="0 0 0" rpy="0 0 0"/><geometry><mesh filename="meshes/links/upper_arm_hull.stl"/></geometry></collision>
   </link>
   <link name="roll">
-    <inertial><origin xyz="0.023923229 -0.000747269 0.004223543" rpy="0 0 0"/><mass value="0.072655"/>
-      <inertia ixx="0.00001370" ixy="0.00000026" ixz="-0.00000151" iyy="0.00001872" iyz="0.00000004" izz="0.00002199"/></inertial>
+    <inertial><origin xyz="0.024076416 -0.000545862 0.004056877" rpy="0 0 0"/><mass value="0.072655"/>
+      <inertia ixx="0.00001384" ixy="0.00000023" ixz="-0.00000145" iyy="0.00001886" iyz="0.00000003" izz="0.00002213"/></inertial>
     <visual><origin xyz="0 0 0" rpy="0 0 0"/><geometry><mesh filename="meshes/links/roll.stl"/></geometry><material name="roll"><color rgba="0.3 0.3 0.35 1"/></material></visual>
     <collision><origin xyz="0 0 0" rpy="0 0 0"/><geometry><mesh filename="meshes/links/roll_hull.stl"/></geometry></collision>
   </link>
   <link name="yoke">
-    <inertial><origin xyz="0.032223121 0.001162045 -0.005225833" rpy="0 0 0"/><mass value="0.078676"/>
-      <inertia ixx="0.00002093" ixy="-0.00000003" ixz="-0.00000143" iyy="0.00002466" iyz="-0.00000001" izz="0.00001954"/></inertial>
+    <inertial><origin xyz="0.032623668 0.002101116 -0.005198046" rpy="0 0 0"/><mass value="0.078676"/>
+      <inertia ixx="0.00002115" ixy="-0.00000003" ixz="-0.00000128" iyy="0.00002443" iyz="-0.00000001" izz="0.00001939"/></inertial>
     <visual><origin xyz="0 0 0" rpy="0 0 0"/><geometry><mesh filename="meshes/links/yoke.stl"/></geometry><material name="yoke"><color rgba="0.9 0.45 0.25 1"/></material></visual>
     <collision><origin xyz="0 0 0" rpy="0 0 0"/><geometry><mesh filename="meshes/links/yoke_hull.stl"/></geometry></collision>
   </link>
   <link name="head">
-    <inertial><origin xyz="0.010011215 -0.002016227 -0.000004724" rpy="0 0 0"/><mass value="0.038377"/>
-      <inertia ixx="0.00004909" ixy="0.00000074" ixz="0.00000000" iyy="0.00002784" iyz="-0.00000000" izz="0.00002779"/></inertial>
+    <inertial><origin xyz="0.009482801 -0.002161431 -0.000000000" rpy="0 0 0"/><mass value="0.038392"/>
+      <inertia ixx="0.00005960" ixy="0.00000077" ixz="0.00000000" iyy="0.00003305" iyz="-0.00000000" izz="0.00003285"/></inertial>
     <visual><origin xyz="0 0 0" rpy="0 0 0"/><geometry><mesh filename="meshes/links/head.stl"/></geometry><material name="head"><color rgba="0.95 0.95 0.9 1"/></material></visual>
     <collision><origin xyz="0 0 0" rpy="0 0 0"/><geometry><mesh filename="meshes/links/head_hull.stl"/></geometry></collision>
   </link>
   <joint name="J1" type="revolute"><parent link="base"/><child link="turntable"/><origin xyz="-0.000005000 -0.000000000 0.050450000" rpy="0 0 0"/><axis xyz="-0.000000000 -0.000000000 -1.000000000"/><limit lower="-2.617994" upper="2.617994" effort="2.94" velocity="4.5"/></joint>
   <joint name="J2" type="revolute"><parent link="turntable"/><child link="lower_arm"/><origin xyz="-0.000037169 0.000000000 0.040110000" rpy="0 0 0"/><axis xyz="0.008726535 -0.999961923 0.000000000"/><limit lower="-1.047198" upper="0.733038" effort="2.94" velocity="4.5"/></joint>
   <joint name="J3" type="revolute"><parent link="lower_arm"/><child link="upper_arm"/><origin xyz="-0.131207845 0.000000000 0.075750000" rpy="0 0 0"/><axis xyz="0.008726535 -0.999961923 0.000000000"/><limit lower="-0.523599" upper="2.443461" effort="2.94" velocity="4.5"/></joint>
-  <joint name="J4" type="revolute"><parent link="upper_arm"/><child link="roll"/><origin xyz="0.101885328 0.001278171 0.045294892" rpy="0 0 0"/><axis xyz="-0.984770255 -0.008593960 -0.173648178"/><limit lower="-2.967060" upper="2.967060" effort="2.94" velocity="4.5"/></joint>
-  <joint name="J5" type="revolute"><parent link="roll"/><child link="yoke"/><origin xyz="0.039758641 -0.001278171 0.007013364" rpy="0 0 0"/><axis xyz="-0.008726535 0.999961923 -0.000000000"/><limit lower="-1.221730" upper="1.221730" effort="2.94" velocity="4.5"/></joint>
-  <joint name="J6" type="revolute"><parent link="yoke"/><child link="head"/><origin xyz="0.052664256 0.001346410 0.007411704" rpy="0 0 0"/><axis xyz="0.999961923 0.008726535 -0.000000000"/><limit lower="-2.967060" upper="2.967060" effort="2.94" velocity="4.5"/></joint>
+  <joint name="J4" type="revolute"><parent link="upper_arm"/><child link="roll"/><origin xyz="0.102328652 0.001432046 0.045652538" rpy="0 0 0"/><axis xyz="-0.984770255 -0.008593960 -0.173648178"/><limit lower="-2.967060" upper="2.967060" effort="2.94" velocity="4.5"/></joint>
+  <joint name="J5" type="revolute"><parent link="roll"/><child link="yoke"/><origin xyz="0.039951124 -0.001432046 0.006793210" rpy="0 0 0"/><axis xyz="-0.008726535 0.999961923 0.000000000"/><limit lower="-1.221730" upper="1.221730" effort="2.94" velocity="4.5"/></joint>
+  <joint name="J6" type="revolute"><parent link="yoke"/><child link="head"/><origin xyz="0.052656092 0.002281922 0.007411704" rpy="0 0 0"/><axis xyz="-0.999961923 -0.008726535 0.000000000"/><limit lower="-2.967060" upper="2.967060" effort="2.94" velocity="4.5"/></joint>
 </robot>
