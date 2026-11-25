@@ -3,44 +3,44 @@
 <!-- Visual = merged CAD meshes per link; collision = convex hull of each link mesh. -->
 <robot name="lamp">
   <link name="base">
-    <inertial><origin xyz="-0.001711825 0.000000127 0.027972368" rpy="0 0 0"/><mass value="0.890554"/>
-      <inertia ixx="0.00282191" ixy="0.00000000" ixz="0.00002927" iyy="0.00276725" iyz="-0.00000000" izz="0.00498577"/></inertial>
+    <inertial><origin xyz="-0.001958359 0.000000249 0.025287468" rpy="0 0 0"/><mass value="0.592285"/>
+      <inertia ixx="0.00181676" ixy="0.00000000" ixz="0.00002116" iyy="0.00179067" iyz="-0.00000000" izz="0.00316012"/></inertial>
     <visual><origin xyz="0 0 0" rpy="0 0 0"/><geometry><mesh filename="meshes/links/base.stl"/></geometry><material name="base"><color rgba="0.55 0.55 0.58 1"/></material></visual>
     <collision><origin xyz="0 0 0" rpy="0 0 0"/><geometry><mesh filename="meshes/links/base_hull.stl"/></geometry></collision>
   </link>
   <link name="turntable">
-    <inertial><origin xyz="-0.000036599 0.001134205 0.024481282" rpy="0 0 0"/><mass value="0.069923"/>
-      <inertia ixx="0.00002115" ixy="0.00000002" ixz="0.00000001" iyy="0.00001786" iyz="-0.00000031" izz="0.00001242"/></inertial>
+    <inertial><origin xyz="-0.000036681 0.001137036 0.024510997" rpy="0 0 0"/><mass value="0.069766"/>
+      <inertia ixx="0.00002108" ixy="0.00000002" ixz="0.00000001" iyy="0.00001781" iyz="-0.00000031" izz="0.00001236"/></inertial>
     <visual><origin xyz="0 0 0" rpy="0 0 0"/><geometry><mesh filename="meshes/links/turntable.stl"/></geometry><material name="turntable"><color rgba="0.35 0.35 0.4 1"/></material></visual>
     <collision><origin xyz="0 0 0" rpy="0 0 0"/><geometry><mesh filename="meshes/links/turntable_hull.stl"/></geometry></collision>
   </link>
   <link name="lower_arm">
-    <inertial><origin xyz="-0.065606975 0.000349794 0.037875000" rpy="0 0 0"/><mass value="0.125714"/>
-      <inertia ixx="0.00007314" ixy="-0.00000100" ixz="0.00007687" iyy="0.00018716" iyz="0.00000067" izz="0.00016189"/></inertial>
+    <inertial><origin xyz="-0.065606975 0.000349794 0.037875000" rpy="0 0 0"/><mass value="0.074165"/>
+      <inertia ixx="0.00004315" ixy="-0.00000059" ixz="0.00004535" iyy="0.00011042" iyz="0.00000040" izz="0.00009551"/></inertial>
     <visual><origin xyz="0 0 0" rpy="0 0 0"/><geometry><mesh filename="meshes/links/lower_arm.stl"/></geometry><material name="lower_arm"><color rgba="0.95 0.75 0.25 1"/></material></visual>
     <collision><origin xyz="0 0 0" rpy="0 0 0"/><geometry><mesh filename="meshes/links/lower_arm_hull.stl"/></geometry></collision>
   </link>
   <link name="upper_arm">
-    <inertial><origin xyz="0.041002348 -0.004040521 0.030100957" rpy="0 0 0"/><mass value="0.181295"/>
-      <inertia ixx="0.00007845" ixy="0.00001793" ixz="-0.00008255" iyy="0.00032347" iyz="0.00000575" izz="0.00030915"/></inertial>
+    <inertial><origin xyz="0.041039661 -0.004162067 0.029900359" rpy="0 0 0"/><mass value="0.173758"/>
+      <inertia ixx="0.00007601" ixy="0.00001862" ixz="-0.00008145" iyy="0.00031626" iyz="0.00000598" izz="0.00030122"/></inertial>
     <visual><origin xyz="0 0 0" rpy="0 0 0"/><geometry><mesh filename="meshes/links/upper_arm.stl"/></geometry><material name="upper_arm"><color rgba="0.95 0.6 0.2 1"/></material></visual>
     <collision><origin xyz="0 0 0" rpy="0 0 0"/><geometry><mesh filename="meshes/links/upper_arm_hull.stl"/></geometry></collision>
   </link>
   <link name="roll">
-    <inertial><origin xyz="0.024457305 -0.000789320 0.004317930" rpy="0 0 0"/><mass value="0.069643"/>
-      <inertia ixx="0.00001265" ixy="0.00000022" ixz="-0.00000147" iyy="0.00001770" iyz="0.00000004" izz="0.00002072"/></inertial>
+    <inertial><origin xyz="0.023923229 -0.000747269 0.004223543" rpy="0 0 0"/><mass value="0.072655"/>
+      <inertia ixx="0.00001370" ixy="0.00000026" ixz="-0.00000151" iyy="0.00001872" iyz="0.00000004" izz="0.00002199"/></inertial>
     <visual><origin xyz="0 0 0" rpy="0 0 0"/><geometry><mesh filename="meshes/links/roll.stl"/></geometry><material name="roll"><color rgba="0.3 0.3 0.35 1"/></material></visual>
     <collision><origin xyz="0 0 0" rpy="0 0 0"/><geometry><mesh filename="meshes/links/roll_hull.stl"/></geometry></collision>
   </link>
   <link name="yoke">
-    <inertial><origin xyz="0.033084313 0.001170117 -0.005093796" rpy="0 0 0"/><mass value="0.071717"/>
-      <inertia ixx="0.00001830" ixy="-0.00000003" ixz="-0.00000104" iyy="0.00002171" iyz="-0.00000001" izz="0.00001614"/></inertial>
+    <inertial><origin xyz="0.032223121 0.001162045 -0.005225833" rpy="0 0 0"/><mass value="0.078676"/>
+      <inertia ixx="0.00002093" ixy="-0.00000003" ixz="-0.00000143" iyy="0.00002466" iyz="-0.00000001" izz="0.00001954"/></inertial>
     <visual><origin xyz="0 0 0" rpy="0 0 0"/><geometry><mesh filename="meshes/links/yoke.stl"/></geometry><material name="yoke"><color rgba="0.9 0.45 0.25 1"/></material></visual>
     <collision><origin xyz="0 0 0" rpy="0 0 0"/><geometry><mesh filename="meshes/links/yoke_hull.stl"/></geometry></collision>
   </link>
   <link name="head">
-    <inertial><origin xyz="0.010011215 -0.002016227 -0.000004724" rpy="0 0 0"/><mass value="0.025082"/>
-      <inertia ixx="0.00003208" ixy="0.00000048" ixz="0.00000000" iyy="0.00001820" iyz="-0.00000000" izz="0.00001816"/></inertial>
+    <inertial><origin xyz="0.010011215 -0.002016227 -0.000004724" rpy="0 0 0"/><mass value="0.038377"/>
+      <inertia ixx="0.00004909" ixy="0.00000074" ixz="0.00000000" iyy="0.00002784" iyz="-0.00000000" izz="0.00002779"/></inertial>
     <visual><origin xyz="0 0 0" rpy="0 0 0"/><geometry><mesh filename="meshes/links/head.stl"/></geometry><material name="head"><color rgba="0.95 0.95 0.9 1"/></material></visual>
     <collision><origin xyz="0 0 0" rpy="0 0 0"/><geometry><mesh filename="meshes/links/head_hull.stl"/></geometry></collision>
   </link>

@@ -15,6 +15,12 @@ Q = np.array([[1, 0, 0], [0, 0, -1], [0, 1, 0]], float)   # SW (x,y,z) -> URDF (
 
 r = json.load(open(HERE / "zero_pose.json"))
 tf, mass = r["zero_tf"], r["mass"]
+# SolidWorks masses assume ~1 g/cm3 solid; rescale printed parts to PETG + infill (run mass_report.py to refresh)
+_pm = HERE / "printed_mass.json"
+if _pm.exists():
+    for c, kg in json.load(open(_pm)).items():
+        f = kg / mass[c]["mass"]
+        mass[c] = {**mass[c], "mass": kg, "I_com_local": [x * f for x in mass[c]["I_com_local"]]}
 
 LINKS = {  # link: components
     "base": ["base cover^main-1", "base plate^main-2", "STS3215_c.step-1"],
