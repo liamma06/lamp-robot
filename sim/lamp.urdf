@@ -9,14 +9,14 @@
     <collision><origin xyz="0 0 0" rpy="0 0 0"/><geometry><mesh filename="meshes/links/base_hull.stl"/></geometry></collision>
   </link>
   <link name="turntable">
-    <inertial><origin xyz="-0.000036607 0.001126257 0.024430561" rpy="0 0 0"/><mass value="0.069766"/>
-      <inertia ixx="0.00002109" ixy="0.00000002" ixz="0.00000001" iyy="0.00001786" iyz="-0.00000034" izz="0.00001207"/></inertial>
+    <inertial><origin xyz="-0.000036701 0.001129153 0.024487040" rpy="0 0 0"/><mass value="0.069587"/>
+      <inertia ixx="0.00002100" ixy="0.00000002" ixz="0.00000001" iyy="0.00001777" iyz="-0.00000033" izz="0.00001207"/></inertial>
     <visual><origin xyz="0 0 0" rpy="0 0 0"/><geometry><mesh filename="meshes/links/turntable.stl"/></geometry><material name="turntable"><color rgba="0.35 0.35 0.4 1"/></material></visual>
     <collision><origin xyz="0 0 0" rpy="0 0 0"/><geometry><mesh filename="meshes/links/turntable_hull.stl"/></geometry></collision>
   </link>
   <link name="lower_arm">
-    <inertial><origin xyz="-0.065606975 0.000349794 0.037875000" rpy="0 0 0"/><mass value="0.074165"/>
-      <inertia ixx="0.00004260" ixy="-0.00000058" ixz="0.00004459" iyy="0.00010868" iyz="0.00000039" izz="0.00009409"/></inertial>
+    <inertial><origin xyz="-0.065616232 0.000352648 0.037880330" rpy="0 0 0"/><mass value="0.073846"/>
+      <inertia ixx="0.00004243" ixy="-0.00000043" ixz="0.00004439" iyy="0.00010820" iyz="0.00000031" izz="0.00009368"/></inertial>
     <visual><origin xyz="0 0 0" rpy="0 0 0"/><geometry><mesh filename="meshes/links/lower_arm.stl"/></geometry><material name="lower_arm"><color rgba="0.95 0.75 0.25 1"/></material></visual>
     <collision><origin xyz="0 0 0" rpy="0 0 0"/><geometry><mesh filename="meshes/links/lower_arm_hull.stl"/></geometry></collision>
   </link>
@@ -27,20 +27,20 @@
     <collision><origin xyz="0 0 0" rpy="0 0 0"/><geometry><mesh filename="meshes/links/upper_arm_hull.stl"/></geometry></collision>
   </link>
   <link name="roll">
-    <inertial><origin xyz="0.024076416 -0.000545862 0.004056877" rpy="0 0 0"/><mass value="0.072655"/>
-      <inertia ixx="0.00001384" ixy="0.00000023" ixz="-0.00000145" iyy="0.00001886" iyz="0.00000003" izz="0.00002213"/></inertial>
+    <inertial><origin xyz="0.024093589 -0.000545446 0.004059878" rpy="0 0 0"/><mass value="0.072650"/>
+      <inertia ixx="0.00001389" ixy="0.00000023" ixz="-0.00000145" iyy="0.00001884" iyz="0.00000003" izz="0.00002213"/></inertial>
     <visual><origin xyz="0 0 0" rpy="0 0 0"/><geometry><mesh filename="meshes/links/roll.stl"/></geometry><material name="roll"><color rgba="0.3 0.3 0.35 1"/></material></visual>
     <collision><origin xyz="0 0 0" rpy="0 0 0"/><geometry><mesh filename="meshes/links/roll_hull.stl"/></geometry></collision>
   </link>
   <link name="yoke">
-    <inertial><origin xyz="0.032623668 0.002101116 -0.005198046" rpy="0 0 0"/><mass value="0.078676"/>
-      <inertia ixx="0.00002115" ixy="-0.00000003" ixz="-0.00000128" iyy="0.00002443" iyz="-0.00000001" izz="0.00001939"/></inertial>
+    <inertial><origin xyz="0.032744323 0.002082389 -0.005217292" rpy="0 0 0"/><mass value="0.078388"/>
+      <inertia ixx="0.00002101" ixy="0.00000000" ixz="-0.00000124" iyy="0.00002411" iyz="-0.00000002" izz="0.00001895"/></inertial>
     <visual><origin xyz="0 0 0" rpy="0 0 0"/><geometry><mesh filename="meshes/links/yoke.stl"/></geometry><material name="yoke"><color rgba="0.9 0.45 0.25 1"/></material></visual>
     <collision><origin xyz="0 0 0" rpy="0 0 0"/><geometry><mesh filename="meshes/links/yoke_hull.stl"/></geometry></collision>
   </link>
   <link name="head">
-    <inertial><origin xyz="0.009482801 -0.002161431 -0.000000000" rpy="0 0 0"/><mass value="0.038392"/>
-      <inertia ixx="0.00005960" ixy="0.00000077" ixz="0.00000000" iyy="0.00003305" iyz="-0.00000000" izz="0.00003285"/></inertial>
+    <inertial><origin xyz="0.009500523 -0.002167582 -0.000000000" rpy="0 0 0"/><mass value="0.038286"/>
+      <inertia ixx="0.00005961" ixy="0.00000078" ixz="0.00000000" iyy="0.00003305" iyz="-0.00000000" izz="0.00003284"/></inertial>
     <visual><origin xyz="0 0 0" rpy="0 0 0"/><geometry><mesh filename="meshes/links/head.stl"/></geometry><material name="head"><color rgba="0.95 0.95 0.9 1"/></material></visual>
     <collision><origin xyz="0 0 0" rpy="0 0 0"/><geometry><mesh filename="meshes/links/head_hull.stl"/></geometry></collision>
   </link>
